@@ -15,11 +15,11 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purshases = Purchase::All();
+        $purchases = Purchase::with('offering')->get();
 
         return response()->json([
             'status' => true,
-            'purshases' => $purshases
+            'purchases' => $purchases
         ]);
     }
 
@@ -42,7 +42,7 @@ class PurchaseController extends Controller
     public function store(CreatePurchaseRequest $request)
     {
         $data = $request->only('customerName','offeringID','quantity');
-        
+
         $purchase = Purchase::create($data);
 
         return response()->json([

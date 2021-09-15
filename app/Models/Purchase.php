@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PharIo\Manifest\License;
 
 class Purchase extends Model
 {
@@ -14,5 +15,9 @@ class Purchase extends Model
 
     public static function getTableName() {
         return (new self)->getTable();
+    }
+
+    public function offering() {
+        return $this->belongsTo(Offering::class, "offeringID");
     }
 }
